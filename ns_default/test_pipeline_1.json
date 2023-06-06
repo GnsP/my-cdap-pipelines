@@ -1,0 +1,58 @@
+{
+  "name": "test_pipeline_1",
+  "appVersion": "7f5330c5-042a-11ee-89c3-02421395142b",
+  "description": "Data Pipeline Application",
+  "change": {
+    "author": "gnspsd",
+    "creationTimeMillis": 1686029106639,
+    "latest": true
+  },
+  "configuration": "{\"resources\":{\"memoryMB\":2048.0,\"virtualCores\":1.0},\"driverResources\":{\"memoryMB\":2048.0,\"virtualCores\":1.0},\"connections\":[{\"from\":\"File\",\"to\":\"CSVParser\"},{\"from\":\"CSVParser\",\"to\":\"File2\"}],\"comments\":[],\"postActions\":[],\"properties\":{},\"processTimingEnabled\":true,\"stageLoggingEnabled\":false,\"stages\":[{\"name\":\"File\",\"plugin\":{\"name\":\"File\",\"type\":\"batchsource\",\"label\":\"File\",\"artifact\":{\"name\":\"core-plugins\",\"version\":\"2.12.0-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"referenceName\":\"hr_data_csv\",\"path\":\"/usr/local/google/home/gnspsd/opensource/testdata/testdata-hr.csv\",\"format\":\"text\",\"sampleSize\":\"1000\",\"filenameOnly\":\"false\",\"recursive\":\"false\",\"ignoreNonExistingFolders\":\"false\",\"fileEncoding\":\"UTF-8\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"textfile\\\",\\\"fields\\\":[{\\\"name\\\":\\\"offset\\\",\\\"type\\\":\\\"long\\\"},{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\"}},\"outputSchema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"textfile\\\",\\\"fields\\\":[{\\\"name\\\":\\\"offset\\\",\\\"type\\\":\\\"long\\\"},{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\",\"id\":\"File\"},{\"name\":\"CSVParser\",\"plugin\":{\"name\":\"CSVParser\",\"type\":\"transform\",\"label\":\"CSVParser\",\"artifact\":{\"name\":\"transform-plugins\",\"version\":\"2.12.0-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"field\":\"body\",\"format\":\"Custom\",\"delimiter\":\",\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"textfile\\\",\\\"fields\\\":[{\\\"name\\\":\\\"offset\\\",\\\"type\\\":\\\"long\\\"},{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\"}},\"outputSchema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"textfile\\\",\\\"fields\\\":[{\\\"name\\\":\\\"offset\\\",\\\"type\\\":\\\"long\\\"},{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\",\"inputSchema\":[{\"name\":\"File\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"textfile\\\",\\\"fields\\\":[{\\\"name\\\":\\\"offset\\\",\\\"type\\\":\\\"long\\\"},{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\"}],\"id\":\"CSVParser\"},{\"name\":\"File2\",\"plugin\":{\"name\":\"File\",\"type\":\"batchsink\",\"label\":\"File2\",\"artifact\":{\"name\":\"core-plugins\",\"version\":\"2.12.0-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"referenceName\":\"csv_hr_sink\",\"path\":\"/usr/local/google/home/gnspsd/opensource/testdata/output\",\"suffix\":\"yyyy-MM-dd-HH-mm\",\"format\":\"csv\",\"writeHeader\":\"false\"}},\"outputSchema\":\"\",\"inputSchema\":[],\"id\":\"File2\"}],\"schedule\":\"0 1 */1 * *\",\"engine\":\"spark\",\"numOfRecordsPreview\":100.0,\"rangeRecordsPreview\":{\"min\":1.0,\"max\":\"5000\"},\"maxConcurrentRuns\":1.0}",
+  "datasets": [],
+  "programs": [
+    {
+      "type": "Spark",
+      "app": "test_pipeline_1",
+      "name": "phase-1",
+      "description": "Sources \u0027File\u0027 to sinks \u0027File2\u0027."
+    },
+    {
+      "type": "Workflow",
+      "app": "test_pipeline_1",
+      "name": "DataPipelineWorkflow",
+      "description": "Data Pipeline Workflow"
+    }
+  ],
+  "plugins": [
+    {
+      "id": "CSVParser",
+      "name": "CSVParser",
+      "type": "transform"
+    },
+    {
+      "id": "File:text",
+      "name": "text",
+      "type": "validatingInputFormat"
+    },
+    {
+      "id": "File2:csv",
+      "name": "csv",
+      "type": "validatingOutputFormat"
+    },
+    {
+      "id": "File2",
+      "name": "File",
+      "type": "batchsink"
+    },
+    {
+      "id": "File",
+      "name": "File",
+      "type": "batchsource"
+    }
+  ],
+  "artifact": {
+    "name": "cdap-data-pipeline",
+    "version": "6.10.0-SNAPSHOT",
+    "scope": "SYSTEM"
+  }
+}
