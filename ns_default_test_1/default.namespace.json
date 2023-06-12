@@ -1,0 +1,24 @@
+{
+  "name": "default",
+  "profiles": [
+    {
+      "name": "native",
+      "label": "native",
+      "description": "Runs programs locally on the cluster",
+      "scope": "SYSTEM",
+      "status": "ENABLED",
+      "provisioner": {
+        "name": "native",
+        "properties": [],
+        "totalProcessingCpusLabel": "Custom"
+      },
+      "created": 1685947768
+    }
+  ],
+  "preferences": {
+    "properties": {},
+    "seqId": 0,
+    "resolved": false
+  },
+  "connections": []
+}
