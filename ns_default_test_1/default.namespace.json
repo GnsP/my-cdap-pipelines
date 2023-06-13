@@ -16,8 +16,11 @@
     }
   ],
   "preferences": {
-    "properties": {},
-    "seqId": 0,
+    "properties": {
+      "key1": "value1",
+      "yet another key": "a value"
+    },
+    "seqId": 1,
     "resolved": false
   },
   "connections": []
