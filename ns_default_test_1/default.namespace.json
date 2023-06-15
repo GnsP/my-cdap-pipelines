@@ -18,9 +18,10 @@
   "preferences": {
     "properties": {
       "key1": "value1",
-      "yet another key": "a value"
+      "yet another key": "a value",
+      "One more key": "One more value"
     },
-    "seqId": 1,
+    "seqId": 2,
     "resolved": false
   },
   "connections": []
