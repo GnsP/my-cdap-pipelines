@@ -24,5 +24,50 @@
     "seqId": 2,
     "resolved": false
   },
-  "connections": []
+  "connections": [
+    {
+      "connectionId": "my_bq_connn",
+      "connectionType": "BigQuery",
+      "name": "my_bq_connn",
+      "description": "bigquery test connection",
+      "plugin": {
+        "category": "Google Cloud Platform",
+        "name": "BigQuery",
+        "type": "connector",
+        "properties": {
+          "project": "gnspsd-dev",
+          "showHiddenDatasets": "false",
+          "serviceAccountType": "JSON",
+          "datasetProject": "gnspsd-dev",
+          "serviceAccountJSON": "{\n  \"type\": \"service_account\",\n  \"project_id\": \"gnspsd-dev\",\n  \"private_key_id\": \"1558508c56553f6377224c2a8f684610974dcfb3\",\n  \"private_key\": \"-----BEGIN PRIVATE KEY-----\\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCwQH/Kwf7BxQ0t\\nUDSnq31Huba2+X+/pAj91ga19YGh3ypnWu2pr8GH0LasmFSbtyah/GD4/G5jPV9S\\nUKkmhYMcEDBVHm7r+kvn+DegvjgVKR/PXkfeIUVRdPEyIKsgE5UB0KzLPcmfYGSj\\nnHnC4u8GuVPJgY8JAPwv3SngBGcnOOc9Vrlf7FlK89T4nCGZVPRU4i2MTPrskXc4\\n6Ng+gKOlnKEOX+O3JGGVmEeXDT7kxUhTUmi6bjWQ6n0jw2JajQxqZqZ40qWIaKCV\\nDIuyVzxBB53pSkkhvV0dqrf2ySJOIc6BA1C0fO8LdeyH+7eUp3ot9m4El1igyQ6B\\n3oHqbbyrAgMBAAECggEAFNSSpeJ2mu0QiR31Eynr5Qm4Y/ip1frriyB7645n8zse\\nVlfDRe49N7F9nXllan/jY3qh9VtUKotq1B4vV5uo6qypIa42mtIanYBTBr7kfu+8\\n0DPK16BkAmQJS4zb3K8jybKhcWXMifcI/eM06skKSeemVObogj5pD7kaRV0P2e0n\\no+QSRZpMIeoufXahSUdJTdGI+LnDsjpXMcnPtGu2JxoRWzm++m4Hh1Pim2FDDBq7\\nwS7uK6RUEvKCf9mTjwZjuPFet1jbp6J5bNk1z8uBPdqPsSZkrVgyJbYg3nmnU7W5\\n+5+DZc8VobXaAvBbIJAWpSWwTt8HAFWjQ7KqPEbOYQKBgQDwQ4vU4ROicDMTuwT9\\neQQ9XDCfuqFDcdtWJBlydDTMtnloimqRuj5aRuLsFzLSEsF1Wo9jC1Ida0KC0Rc/\\nIlswMTLq/QII6V+LGMDtJogCRPPm0mITn3GPB9IOyD1Qi5G+xZzp/UlGNW/NGk38\\nyi+mUCQwejdQROHI30dU4lXPoQKBgQC7y63E05JXCAXm0LcHC0JVqh57Yly58SIx\\niWHl/Tb7UDxGb9wP7cK/W/LJI4t77eataVhvpQM3SfoYjZnDlPBYFtvLMUPQBDfd\\nxEKscbA5GNJe96M4RwXE7uLWiqBzNE66mLI0PER8ExqCGAv1B70DkYcIhiZlJ89K\\nN9pr2QsYywKBgFOFR5CjBW5MTpUnSB7M+LpT19tOx0xowfR57BarasdXD3FV3KH3\\n+kDrr2qezd3VA0dGSd4GS29Kn/5VrR0XVle0YpzpgtGSPtJdsoM+B72yNo8gx1NG\\n8/TipRTaauYa/nkwvNFiaRxs6waDhGTB7DqGVW48rgnLSCnJ5EQPwgDBAoGAKVN7\\nG/NLIufbFJ4diOlLYbqcFp7gtPKBidEnwArnDIrtmLqI/OBfmOjNFsJBsbX6q3Kh\\nSYBQotwes0SF7+pYsanmGGLw/1fOS3kjCvvBwe7abJemTX4joODI/llnUbLTGHD9\\n1kzk7UDu9m4AQ52+VIiz5IZQ8LXAAh8ka9NJg90CgYBnSgOcf1zact3aSSOkloB+\\nFFGnVX49CrELox39YXP+tU5XBX3EwCqM6PYP7XeBLxZu601ZHe6hlQOswOedoipK\\n2etgae1DEfnqc+BXxe1UWoR2FFU+ar8m4usHDYh7kRSKpYJyxJxctzYDca4BuNAZ\\nHO41dMiEhSItGnSGOZuRdA\u003d\u003d\\n-----END PRIVATE KEY-----\\n\",\n  \"client_email\": \"dev-sa@gnspsd-dev.iam.gserviceaccount.com\",\n  \"client_id\": \"111791290244567313390\",\n  \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\n  \"token_uri\": \"https://oauth2.googleapis.com/token\",\n  \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\n  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/dev-sa%40gnspsd-dev.iam.gserviceaccount.com\",\n  \"universe_domain\": \"googleapis.com\"\n}"
+        },
+        "artifact": {
+          "name": "google-cloud",
+          "scope": "SYSTEM",
+          "version": "0.22.0-SNAPSHOT"
+        }
+      },
+      "isDefault": false,
+      "preConfigured": false
+    },
+    {
+      "connectionId": "my_file_conn",
+      "connectionType": "File",
+      "name": "my file conn",
+      "description": "",
+      "plugin": {
+        "category": "File",
+        "name": "File",
+        "type": "connector",
+        "properties": {},
+        "artifact": {
+          "name": "core-plugins",
+          "scope": "SYSTEM",
+          "version": "2.12.0-SNAPSHOT"
+        }
+      },
+      "isDefault": false,
+      "preConfigured": false
+    }
+  ]
 }
