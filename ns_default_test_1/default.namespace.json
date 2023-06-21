@@ -261,11 +261,12 @@
   ],
   "preferences": {
     "properties": {
+      "One more key": "One more value",
       "key1": "value1",
       "yet another key": "a value",
-      "One more key": "One more value"
+      "a key again": "a value again"
     },
-    "seqId": 2,
+    "seqId": 3,
     "resolved": false
   },
   "connections": [
