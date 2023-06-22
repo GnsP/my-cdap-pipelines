@@ -1,0 +1,59 @@
+{
+  "name": "test_pipeline_1",
+  "appVersion": "bd718547-0683-11ee-8ba0-02421395142b",
+  "description": "Data Pipeline Application",
+  "change": {
+    "author": "gnspsd",
+    "creationTimeMillis": 1686287338391,
+    "latest": true,
+    "description": "change field"
+  },
+  "configuration": "{\"resources\":{\"memoryMB\":2048.0,\"virtualCores\":1.0},\"driverResources\":{\"memoryMB\":2048.0,\"virtualCores\":1.0},\"connections\":[{\"from\":\"File\",\"to\":\"Distinct\"},{\"from\":\"Distinct\",\"to\":\"File2\"}],\"comments\":[],\"postActions\":[],\"properties\":{},\"processTimingEnabled\":true,\"stageLoggingEnabled\":false,\"stages\":[{\"name\":\"File\",\"plugin\":{\"name\":\"File\",\"type\":\"batchsource\",\"label\":\"File\",\"artifact\":{\"name\":\"core-plugins\",\"version\":\"2.11.1\",\"scope\":\"SYSTEM\"},\"properties\":{\"referenceName\":\"testdata_hr\",\"path\":\"/usr/local/google/home/gnspsd/opensource/testdata/testdata-hr.csv\",\"format\":\"csv\",\"sampleSize\":\"1000\",\"filenameOnly\":\"false\",\"recursive\":\"false\",\"ignoreNonExistingFolders\":\"false\",\"fileEncoding\":\"UTF-8\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text\\\",\\\"fields\\\":[{\\\"name\\\":\\\"Emp_Id\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"satisfaction_level\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"last_evaluation\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"number_project\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"average_montly_hours\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"time_spend_company\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"Work_accident\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"left\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"promotion_last_5years\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"Department\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"salary\\\",\\\"type\\\":\\\"string\\\"}]}\",\"enableQuotedValues\":\"false\",\"skipHeader\":\"true\"}},\"outputSchema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text\\\",\\\"fields\\\":[{\\\"name\\\":\\\"Emp_Id\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"satisfaction_level\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"last_evaluation\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"number_project\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"average_montly_hours\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"time_spend_company\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"Work_accident\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"left\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"promotion_last_5years\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"Department\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"salary\\\",\\\"type\\\":\\\"string\\\"}]}\",\"id\":\"File\"},{\"name\":\"Distinct\",\"plugin\":{\"name\":\"Distinct\",\"type\":\"batchaggregator\",\"label\":\"Distinct\",\"artifact\":{\"name\":\"core-plugins\",\"version\":\"2.11.1\",\"scope\":\"SYSTEM\"},\"properties\":{\"fields\":\"Department\"}},\"outputSchema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text.typedistinct\\\",\\\"fields\\\":[{\\\"name\\\":\\\"Department\\\",\\\"type\\\":\\\"string\\\"}]}\",\"inputSchema\":[{\"name\":\"File\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text\\\",\\\"fields\\\":[{\\\"name\\\":\\\"Emp_Id\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"satisfaction_level\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"last_evaluation\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"number_project\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"average_montly_hours\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"time_spend_company\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"Work_accident\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"left\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"promotion_last_5years\\\",\\\"type\\\":\\\"int\\\"},{\\\"name\\\":\\\"Department\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"salary\\\",\\\"type\\\":\\\"string\\\"}]}\"}],\"id\":\"Distinct\"},{\"name\":\"File2\",\"plugin\":{\"name\":\"File\",\"type\":\"batchsink\",\"label\":\"File2\",\"artifact\":{\"name\":\"core-plugins\",\"version\":\"2.11.1\",\"scope\":\"SYSTEM\"},\"properties\":{\"referenceName\":\"file_sink_out\",\"path\":\"/usr/local/google/home/gnspsd/opensource/testdata/output\",\"suffix\":\"yyyy-MM-dd-HH-mm\",\"format\":\"csv\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text.typedistinct\\\",\\\"fields\\\":[{\\\"name\\\":\\\"Work_accident\\\",\\\"type\\\":\\\"int\\\"}]}\",\"writeHeader\":\"true\"}},\"outputSchema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text.typedistinct\\\",\\\"fields\\\":[{\\\"name\\\":\\\"Work_accident\\\",\\\"type\\\":\\\"int\\\"}]}\",\"inputSchema\":[{\"name\":\"Distinct\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text.typedistinct\\\",\\\"fields\\\":[{\\\"name\\\":\\\"Work_accident\\\",\\\"type\\\":\\\"int\\\"}]}\"}],\"id\":\"File2\"}],\"schedule\":\"0 1 */1 * *\",\"engine\":\"spark\",\"numOfRecordsPreview\":100.0,\"rangeRecordsPreview\":{\"min\":1.0,\"max\":\"5000\"},\"description\":\"Data Pipeline Application\",\"maxConcurrentRuns\":1.0}",
+  "datasets": [],
+  "programs": [
+    {
+      "type": "Spark",
+      "app": "test_pipeline_1",
+      "name": "phase-1",
+      "description": "Sources \u0027File\u0027 to sinks \u0027File2\u0027."
+    },
+    {
+      "type": "Workflow",
+      "app": "test_pipeline_1",
+      "name": "DataPipelineWorkflow",
+      "description": "Data Pipeline Workflow"
+    }
+  ],
+  "plugins": [
+    {
+      "id": "Distinct",
+      "name": "Distinct",
+      "type": "batchaggregator"
+    },
+    {
+      "id": "File2:csv",
+      "name": "csv",
+      "type": "validatingOutputFormat"
+    },
+    {
+      "id": "File",
+      "name": "File",
+      "type": "batchsource"
+    },
+    {
+      "id": "File2",
+      "name": "File",
+      "type": "batchsink"
+    },
+    {
+      "id": "File:csv",
+      "name": "csv",
+      "type": "validatingInputFormat"
+    }
+  ],
+  "artifact": {
+    "name": "cdap-data-pipeline",
+    "version": "6.1.1",
+    "scope": "SYSTEM"
+  }
+}
