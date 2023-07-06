@@ -1,10 +1,10 @@
 {
   "name": "test_pipeline_1",
-  "appVersion": "bd718547-0683-11ee-8ba0-02421395142b",
+  "appVersion": "37c6e184-10e5-11ee-a529-000000b642c1",
   "description": "Data Pipeline Application",
   "change": {
     "author": "gnspsd",
-    "creationTimeMillis": 1686287338391,
+    "creationTimeMillis": 1687428717259,
     "latest": true,
     "description": "change field"
   },
@@ -55,5 +55,58 @@
     "name": "cdap-data-pipeline",
     "version": "6.10.0-SNAPSHOT",
     "scope": "SYSTEM"
-  }
+  },
+  "preferences": {
+    "properties": {
+      "app.pipeline.pushdownEnabled": "true",
+      "app.pipeline.pushdown.plugin.name": "BigQueryPushdownEngine",
+      "app.pipeline.pushdown.plugin.label": "BigQueryPushdown",
+      "app.pipeline.pushdown.plugin.type": "sqlengine",
+      "app.pipeline.pushdown.plugin.artifact.name": "google-cloud",
+      "app.pipeline.pushdown.plugin.artifact.version": "0.22.0-SNAPSHOT",
+      "app.pipeline.pushdown.plugin.artifact.scope": "SYSTEM",
+      "app.pipeline.pushdown.plugin.properties.useConnection": "false",
+      "app.pipeline.pushdown.plugin.properties.project": "auto-detect",
+      "app.pipeline.pushdown.plugin.properties.serviceAccountType": "filePath",
+      "app.pipeline.pushdown.plugin.properties.serviceFilePath": "auto-detect",
+      "app.pipeline.pushdown.plugin.properties.location": "US",
+      "app.pipeline.pushdown.plugin.properties.retainTables": "false",
+      "app.pipeline.pushdown.plugin.properties.tempTableTTLHours": "72",
+      "app.pipeline.pushdown.plugin.properties.jobPriority": "batch",
+      "app.pipeline.pushdown.plugin.properties.useStorageReadAPI": "false",
+      "system.spark.key1": "val1",
+      "app.pipeline.overwriteConfig": "true"
+    },
+    "seqId": 1,
+    "resolved": false
+  },
+  "schedules": [
+    {
+      "namespace": "default",
+      "application": "test_pipeline_1",
+      "name": "dataPipelineSchedule",
+      "description": "Data pipeline schedule",
+      "program": {
+        "programName": "DataPipelineWorkflow",
+        "programType": "WORKFLOW"
+      },
+      "properties": {
+        "system.profile.name": "SYSTEM:native"
+      },
+      "trigger": {
+        "cronExpression": "30 11 6 7 *",
+        "type": "TIME"
+      },
+      "constraints": [
+        {
+          "maxConcurrency": 1,
+          "type": "CONCURRENCY",
+          "waitUntilMet": false
+        }
+      ],
+      "timeoutMillis": 86400000,
+      "status": "SUSPENDED",
+      "lastUpdateTime": 1688622677043
+    }
+  ]
 }
