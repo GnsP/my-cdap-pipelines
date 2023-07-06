@@ -55,5 +55,58 @@
     "name": "cdap-data-pipeline",
     "version": "6.1.1",
     "scope": "SYSTEM"
-  }
+  },
+  "preferences": {
+    "properties": {
+      "app.pipeline.pushdownEnabled": "true",
+      "app.pipeline.pushdown.plugin.name": "BigQueryPushdownEngine",
+      "app.pipeline.pushdown.plugin.label": "BigQueryPushdown",
+      "app.pipeline.pushdown.plugin.type": "sqlengine",
+      "app.pipeline.pushdown.plugin.artifact.name": "google-cloud",
+      "app.pipeline.pushdown.plugin.artifact.version": "0.22.0-SNAPSHOT",
+      "app.pipeline.pushdown.plugin.artifact.scope": "SYSTEM",
+      "app.pipeline.pushdown.plugin.properties.useConnection": "false",
+      "app.pipeline.pushdown.plugin.properties.project": "auto-detect",
+      "app.pipeline.pushdown.plugin.properties.serviceAccountType": "filePath",
+      "app.pipeline.pushdown.plugin.properties.serviceFilePath": "auto-detect",
+      "app.pipeline.pushdown.plugin.properties.location": "US",
+      "app.pipeline.pushdown.plugin.properties.retainTables": "false",
+      "app.pipeline.pushdown.plugin.properties.tempTableTTLHours": "72",
+      "app.pipeline.pushdown.plugin.properties.jobPriority": "batch",
+      "app.pipeline.pushdown.plugin.properties.useStorageReadAPI": "false",
+      "system.spark.key1": "val1",
+      "app.pipeline.overwriteConfig": "true"
+    },
+    "seqId": 1,
+    "resolved": false
+  },
+  "schedules": [
+    {
+      "namespace": "default",
+      "application": "test_pipeline_2",
+      "name": "dataPipelineSchedule",
+      "description": "Data pipeline schedule",
+      "program": {
+        "programName": "DataPipelineWorkflow",
+        "programType": "WORKFLOW"
+      },
+      "properties": {
+        "system.profile.name": "SYSTEM:native"
+      },
+      "trigger": {
+        "cronExpression": "50 11 6 7 *",
+        "type": "TIME"
+      },
+      "constraints": [
+        {
+          "maxConcurrency": 1,
+          "type": "CONCURRENCY",
+          "waitUntilMet": false
+        }
+      ],
+      "timeoutMillis": 86400000,
+      "status": "SUSPENDED",
+      "lastUpdateTime": 1688622677043
+    }
+  ]
 }
