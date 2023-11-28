@@ -1,0 +1,58 @@
+{
+  "name": "test_multi_push_logs_generator",
+  "appVersion": "02d8dd60-8de8-11ee-9242-0000005c88db",
+  "description": "generate logs",
+  "change": {
+    "author": "gnspsd",
+    "creationTimeMillis": 1701173811479,
+    "latest": true
+  },
+  "configuration": "{\"resources\":{\"memoryMB\":1024.0,\"virtualCores\":1.0},\"driverResources\":{\"memoryMB\":1024.0,\"virtualCores\":1.0},\"connections\":[{\"from\":\"logs_data_source\",\"to\":\"LogsGenerator\"},{\"from\":\"LogsGenerator\",\"to\":\"logs_data_sink\"}],\"comments\":[],\"postActions\":[],\"properties\":{},\"processTimingEnabled\":true,\"stageLoggingEnabled\":true,\"stages\":[{\"name\":\"logs_data_source\",\"plugin\":{\"name\":\"File\",\"type\":\"batchsource\",\"label\":\"logs_data_source\",\"artifact\":{\"name\":\"core-plugins\",\"version\":\"2.13.0-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"format\":\"text\",\"skipHeader\":\"false\",\"filenameOnly\":\"false\",\"recursive\":\"false\",\"ignoreNonExistingFolders\":\"false\",\"copyHeader\":\"true\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"etlSchemaBody\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\",\"path\":\"file:/tmp/cdap-ui-integration-fixtures/airports.csv\",\"referenceName\":\"logs_data_source\"}},\"outputSchema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"etlSchemaBody\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\",\"id\":\"logs_data_source\"},{\"name\":\"LogsGenerator\",\"plugin\":{\"name\":\"JavaScript\",\"type\":\"transform\",\"label\":\"LogsGenerator\",\"artifact\":{\"name\":\"core-plugins\",\"version\":\"2.13.0-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"script\":\"/**\\n * @summary Transforms the provided input record into zero or more output records or errors.\\n\\n * Input records are available in JavaScript code as JSON objects. \\n\\n * @param input an object that contains the input record as a JSON.   e.g. to access a field called \\u0027total\\u0027 from the input record, use input.total.\\n * @param emitter an object that can be used to emit zero or more records (using the emitter.emit() method) or errors (using the emitter.emitError() method) \\n * @param context an object that provides access to:\\n *            1. CDAP Metrics - context.getMetrics().count(\\u0027output\\u0027, 1);\\n *            2. CDAP Logs - context.getLogger().debug(\\u0027Received a record\\u0027);\\n *            3. Lookups - context.getLookup(\\u0027blacklist\\u0027).lookup(input.id); or\\n *            4. Runtime Arguments - context.getArguments().get(\\u0027priceThreshold\\u0027) \\n */ \\nfunction transform(input, emitter, context) {\\n  /**\\n  * Delay for a number of milliseconds\\n  */\\n  function sleep(delay) {\\n      var start \\u003d new Date().getTime();\\n      while (new Date().getTime() \\u003c start + delay);\\n  }\\n  \\n  sleep(15000);\\n  var split \\u003d input.body.split(\\u0027,\\u0027);\\n  var logger \\u003d context.getLogger();\\n  logger.warn(\\u0027This is a WARN\\u0027);\\n  for (var i \\u003d 0; i \\u003c 100; i++) {\\n    logger.debug(\\u0027DEBUG \\u0027 + split[0] + \\u0027 \\u0027 + i);\\n  }\\n  \\n  emitter.emit(input);\\n}\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"etlSchemaBody\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\"}},\"outputSchema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"etlSchemaBody\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\",\"inputSchema\":[{\"name\":\"logs_data_source\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"etlSchemaBody\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\"}],\"id\":\"LogsGenerator\"},{\"name\":\"logs_data_sink\",\"plugin\":{\"name\":\"File\",\"type\":\"batchsink\",\"label\":\"logs_data_sink\",\"artifact\":{\"name\":\"core-plugins\",\"version\":\"2.13.0-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"suffix\":\"yyyy-MM-dd-HH-mm-ss\",\"format\":\"csv\",\"referenceName\":\"logs_data_sink\",\"path\":\"/tmp/cdap-ui-integration-fixtures\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"etlSchemaBody\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\"}},\"outputSchema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"etlSchemaBody\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\",\"inputSchema\":[{\"name\":\"LogsGenerator\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"etlSchemaBody\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\"}],\"id\":\"logs_data_sink\"}],\"schedule\":\"0 * * * *\",\"engine\":\"mapreduce\",\"numOfRecordsPreview\":100.0,\"rangeRecordsPreview\":{\"min\":1.0,\"max\":5000.0},\"description\":\"generate logs\",\"maxConcurrentRuns\":1.0}",
+  "datasets": [],
+  "programs": [
+    {
+      "type": "Mapreduce",
+      "app": "test_multi_push_logs_generator",
+      "name": "phase-1",
+      "description": "MapReduce phase executor. Sources \u0027logs_data_source\u0027 to sinks \u0027logs_data_sink\u0027."
+    },
+    {
+      "type": "Workflow",
+      "app": "test_multi_push_logs_generator",
+      "name": "DataPipelineWorkflow",
+      "description": "Data Pipeline Workflow"
+    }
+  ],
+  "plugins": [
+    {
+      "id": "logs_data_sink",
+      "name": "File",
+      "type": "batchsink"
+    },
+    {
+      "id": "logs_data_sink:csv",
+      "name": "csv",
+      "type": "validatingOutputFormat"
+    },
+    {
+      "id": "logs_data_source:text",
+      "name": "text",
+      "type": "validatingInputFormat"
+    },
+    {
+      "id": "logs_data_source",
+      "name": "File",
+      "type": "batchsource"
+    },
+    {
+      "id": "LogsGenerator",
+      "name": "JavaScript",
+      "type": "transform"
+    }
+  ],
+  "artifact": {
+    "name": "cdap-data-pipeline",
+    "version": "6.11.0-SNAPSHOT",
+    "scope": "SYSTEM"
+  }
+}
