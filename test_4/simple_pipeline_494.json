@@ -1,0 +1,58 @@
+{
+  "name": "simple_pipeline_494",
+  "appVersion": "3476d102-8766-11ee-a6fa-000000f378e7",
+  "description": "Data Pipeline Application",
+  "change": {
+    "author": "gnspsd",
+    "creationTimeMillis": 1700458353174,
+    "latest": true
+  },
+  "configuration": "{\"resources\":{\"memoryMB\":2048.0,\"virtualCores\":1.0},\"driverResources\":{\"memoryMB\":2048.0,\"virtualCores\":1.0},\"connections\":[{\"from\":\"File\",\"to\":\"JavaScript\"},{\"from\":\"JavaScript\",\"to\":\"File2\"}],\"comments\":[],\"postActions\":[],\"properties\":{},\"processTimingEnabled\":true,\"stageLoggingEnabled\":false,\"stages\":[{\"name\":\"File\",\"plugin\":{\"name\":\"File\",\"type\":\"batchsource\",\"label\":\"File\",\"artifact\":{\"name\":\"core-plugins\",\"version\":\"2.13.0-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"referenceName\":\"hr_data\",\"path\":\"/Users/gnspsd/WORK/opensource/testdata/hr.csv\",\"format\":\"csv\",\"sampleSize\":\"1000\",\"filenameOnly\":\"false\",\"recursive\":\"false\",\"ignoreNonExistingFolders\":\"false\",\"fileEncoding\":\"UTF-8\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_0\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_1\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_2\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_3\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_4\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_5\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_6\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_7\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_8\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_9\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_10\\\",\\\"type\\\":\\\"string\\\"}]}\",\"enableQuotedValues\":\"false\",\"skipHeader\":\"true\"}},\"outputSchema\":[{\"name\":\"etlSchemaBody\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_0\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_1\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_2\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_3\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_4\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_5\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_6\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_7\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_8\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_9\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_10\\\",\\\"type\\\":\\\"string\\\"}]}\"}],\"id\":\"File\"},{\"name\":\"JavaScript\",\"plugin\":{\"name\":\"JavaScript\",\"type\":\"transform\",\"label\":\"JavaScript\",\"artifact\":{\"name\":\"core-plugins\",\"version\":\"2.13.0-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"script\":\"/**\\n * @summary Transforms the provided input record into zero or more output records or errors.\\n\\n * Input records are available in JavaScript code as JSON objects. \\n\\n * @param input an object that contains the input record as a JSON.   e.g. to access a field called \\u0027total\\u0027 from the input record, use input.total.\\n * @param emitter an object that can be used to emit zero or more records (using the emitter.emit() method) or errors (using the emitter.emitError() method) \\n * @param context an object that provides access to:\\n *            1. CDAP Metrics - context.getMetrics().count(\\u0027output\\u0027, 1);\\n *            2. CDAP Logs - context.getLogger().debug(\\u0027Received a record\\u0027);\\n *            3. Lookups - context.getLookup(\\u0027blacklist\\u0027).lookup(input.id); or\\n *            4. Runtime Arguments - context.getArguments().get(\\u0027priceThreshold\\u0027) \\n */ \\nfunction transform(input, emitter, context) {\\n  emitter.emit(input);\\n}\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_0\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_1\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_2\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_3\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_4\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_5\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_6\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_7\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_8\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_9\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_10\\\",\\\"type\\\":\\\"string\\\"}]}\"}},\"outputSchema\":[{\"name\":\"etlSchemaBody\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_0\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_1\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_2\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_3\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_4\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_5\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_6\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_7\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_8\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_9\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_10\\\",\\\"type\\\":\\\"string\\\"}]}\"}],\"inputSchema\":[{\"name\":\"File\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_0\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_1\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_2\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_3\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_4\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_5\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_6\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_7\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_8\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_9\\\",\\\"type\\\":\\\"string\\\"},{\\\"name\\\":\\\"body_10\\\",\\\"type\\\":\\\"string\\\"}]}\"}],\"id\":\"JavaScript\"},{\"name\":\"File2\",\"plugin\":{\"name\":\"File\",\"type\":\"batchsink\",\"label\":\"File2\",\"artifact\":{\"name\":\"core-plugins\",\"version\":\"2.13.0-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"referenceName\":\"hr_out\",\"path\":\"/Users/gnspsd/WORK/opensource/testdata/hr_out\",\"suffix\":\"yyyy-MM-dd-HH-mm\",\"format\":\"csv\",\"writeHeader\":\"false\"}},\"outputSchema\":[{\"name\":\"etlSchemaBody\",\"schema\":\"\"}],\"inputSchema\":[{\"name\":\"JavaScript\",\"schema\":\"\"}],\"id\":\"File2\"}],\"schedule\":\"0 1 */1 * *\",\"engine\":\"spark\",\"numOfRecordsPreview\":100.0,\"rangeRecordsPreview\":{\"min\":1.0,\"max\":5000.0},\"maxConcurrentRuns\":1.0}",
+  "datasets": [],
+  "programs": [
+    {
+      "type": "Spark",
+      "app": "simple_pipeline_1",
+      "name": "phase-1",
+      "description": "Sources 'File' to sinks 'File2'."
+    },
+    {
+      "type": "Workflow",
+      "app": "simple_pipeline_1",
+      "name": "DataPipelineWorkflow",
+      "description": "Data Pipeline Workflow"
+    }
+  ],
+  "plugins": [
+    {
+      "id": "JavaScript",
+      "name": "JavaScript",
+      "type": "transform"
+    },
+    {
+      "id": "File2:csv",
+      "name": "csv",
+      "type": "validatingOutputFormat"
+    },
+    {
+      "id": "File2",
+      "name": "File",
+      "type": "batchsink"
+    },
+    {
+      "id": "File",
+      "name": "File",
+      "type": "batchsource"
+    },
+    {
+      "id": "File:csv",
+      "name": "csv",
+      "type": "validatingInputFormat"
+    }
+  ],
+  "artifact": {
+    "name": "cdap-data-pipeline",
+    "version": "6.11.0-SNAPSHOT",
+    "scope": "SYSTEM"
+  }
+}
