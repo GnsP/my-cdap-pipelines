@@ -1,10 +1,10 @@
 {
   "name": "to_test_metadata_simple",
-  "appVersion": "9c13d8ef-0835-11ef-a6c4-00000018ee7b",
+  "appVersion": "3f77460f-084d-11ef-9b97-00000071c68d",
   "description": "Data Pipeline Application",
   "change": {
     "author": "gnspsd",
-    "creationTimeMillis": 1714621181666,
+    "creationTimeMillis": 1714631334212,
     "latest": true,
     "description": "change"
   },
