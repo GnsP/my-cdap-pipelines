@@ -1,0 +1,61 @@
+{
+  "name": "test_decimal_conversion",
+  "appVersion": "1c466053-0b78-11ef-b281-8acf9cd82bdc",
+  "description": "Data Pipeline Application",
+  "change": {
+    "author": "cdap",
+    "creationTimeMillis": 1714979597138,
+    "latest": true
+  },
+  "sourceControlMeta": {
+    "syncStatus": false
+  },
+  "configuration": "{\"resources\":{\"memoryMB\":2048.0,\"virtualCores\":1.0},\"driverResources\":{\"memoryMB\":2048.0,\"virtualCores\":1.0},\"connections\":[{\"from\":\"GCSFile\",\"to\":\"Wrangler\"},{\"from\":\"Wrangler\",\"to\":\"GCS2\"}],\"postActions\":[],\"properties\":{},\"processTimingEnabled\":true,\"stageLoggingEnabled\":true,\"stages\":[{\"name\":\"GCSFile\",\"plugin\":{\"name\":\"GCSFile\",\"type\":\"batchsource\",\"label\":\"GCSFile\",\"artifact\":{\"name\":\"google-cloud\",\"version\":\"0.23.1-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"path\":\"gs://testdata_for_cdf/numbers.csv\",\"fileEncoding\":\"UTF-8\",\"useConnection\":\"true\",\"format\":\"csv\",\"enableQuotedValues\":\"false\",\"connection\":\"${conn(test-gcs-connection)}\",\"skipHeader\":\"false\",\"referenceName\":\"testdata_for_cdf.numbers.csv\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_0\\\",\\\"type\\\":\\\"string\\\"}]}\"}},\"outputSchema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_0\\\",\\\"type\\\":\\\"string\\\"}]}\",\"id\":\"GCSFile\"},{\"name\":\"Wrangler\",\"plugin\":{\"name\":\"Wrangler\",\"type\":\"transform\",\"label\":\"Wrangler\",\"artifact\":{\"name\":\"wrangler-transform\",\"version\":\"4.10.1-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"directives\":\"set-type :body_0 decimal 2 \\u0027DOWN\\u0027\",\"field\":\"*\",\"precondition\":\"false\",\"workspaceId\":\"ff8f89ba-70cb-4641-8f9c-ae5048c7182e\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"outputSchema\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_0\\\",\\\"type\\\":[{\\\"type\\\":\\\"bytes\\\",\\\"logicalType\\\":\\\"decimal\\\",\\\"precision\\\":77,\\\"scale\\\":2},\\\"null\\\"]}]}\"}},\"outputSchema\":[{\"name\":\"etlSchemaBody\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"outputSchema\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_0\\\",\\\"type\\\":[{\\\"type\\\":\\\"bytes\\\",\\\"logicalType\\\":\\\"decimal\\\",\\\"precision\\\":77,\\\"scale\\\":2},\\\"null\\\"]}]}\"}],\"id\":\"Wrangler\"},{\"name\":\"GCS2\",\"plugin\":{\"name\":\"GCS\",\"type\":\"batchsink\",\"label\":\"GCS2\",\"artifact\":{\"name\":\"google-cloud\",\"version\":\"0.23.1-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"useConnection\":\"true\",\"connection\":\"${conn(test-gcs-connection)}\",\"path\":\"gs://testdata_for_cdf/numbers_output\",\"suffix\":\"yyyy-MM-dd-HH-mm\",\"format\":\"csv\",\"location\":\"us\",\"contentType\":\"application/octet-stream\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"outputSchema\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_0\\\",\\\"type\\\":[{\\\"type\\\":\\\"bytes\\\",\\\"logicalType\\\":\\\"decimal\\\",\\\"precision\\\":77,\\\"scale\\\":2},\\\"null\\\"]}]}\",\"writeHeader\":\"false\"}},\"outputSchema\":[{\"name\":\"etlSchemaBody\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"outputSchema\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_0\\\",\\\"type\\\":[{\\\"type\\\":\\\"bytes\\\",\\\"logicalType\\\":\\\"decimal\\\",\\\"precision\\\":77,\\\"scale\\\":2},\\\"null\\\"]}]}\"}],\"inputSchema\":[{\"name\":\"Wrangler\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"outputSchema\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_0\\\",\\\"type\\\":[{\\\"type\\\":\\\"bytes\\\",\\\"logicalType\\\":\\\"decimal\\\",\\\"precision\\\":77,\\\"scale\\\":2},\\\"null\\\"]}]}\"}],\"id\":\"GCS2\"}],\"schedule\":\"0 1 */1 * *\",\"engine\":\"spark\",\"numOfRecordsPreview\":100.0,\"rangeRecordsPreview\":{\"min\":1.0,\"max\":\"5000\"},\"maxConcurrentRuns\":1.0}",
+  "datasets": [],
+  "programs": [
+    {
+      "type": "Spark",
+      "app": "test_decimal_conversion",
+      "name": "phase-1",
+      "description": "Sources \u0027GCSFile\u0027 to sinks \u0027GCS2\u0027."
+    },
+    {
+      "type": "Workflow",
+      "app": "test_decimal_conversion",
+      "name": "DataPipelineWorkflow",
+      "description": "Data Pipeline Workflow"
+    }
+  ],
+  "plugins": [
+    {
+      "id": "GCSFile",
+      "name": "GCSFile",
+      "type": "batchsource"
+    },
+    {
+      "id": "GCSFile:csv",
+      "name": "csv",
+      "type": "validatingInputFormat"
+    },
+    {
+      "id": "GCS2:csv",
+      "name": "csv",
+      "type": "validatingOutputFormat"
+    },
+    {
+      "id": "GCS2",
+      "name": "GCS",
+      "type": "batchsink"
+    },
+    {
+      "id": "Wrangler",
+      "name": "Wrangler",
+      "type": "transform"
+    }
+  ],
+  "artifact": {
+    "name": "cdap-data-pipeline",
+    "version": "6.10.1-SNAPSHOT",
+    "scope": "SYSTEM"
+  }
+}

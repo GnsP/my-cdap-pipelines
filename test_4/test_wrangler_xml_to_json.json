@@ -1,0 +1,61 @@
+{
+  "name": "test_wrangler_xml_to_json",
+  "appVersion": "6b2ac4f8-0b7c-11ef-8ed8-8acf9cd82bdc",
+  "description": "Data Pipeline Application",
+  "change": {
+    "author": "cdap",
+    "creationTimeMillis": 1714981447368,
+    "latest": true
+  },
+  "sourceControlMeta": {
+    "syncStatus": false
+  },
+  "configuration": "{\"resources\":{\"memoryMB\":2048.0,\"virtualCores\":1.0},\"driverResources\":{\"memoryMB\":2048.0,\"virtualCores\":1.0},\"connections\":[{\"from\":\"GCSFile\",\"to\":\"Wrangler\"},{\"from\":\"Wrangler\",\"to\":\"GCS2\"}],\"postActions\":[],\"properties\":{},\"processTimingEnabled\":true,\"stageLoggingEnabled\":true,\"stages\":[{\"name\":\"GCSFile\",\"plugin\":{\"name\":\"GCSFile\",\"type\":\"batchsource\",\"label\":\"GCSFile\",\"artifact\":{\"name\":\"google-cloud\",\"version\":\"0.23.1-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"format\":\"blob\",\"path\":\"gs://testdata_for_cdf/test_xml_parse.xml\",\"connection\":\"${conn(test-gcs-connection)}\",\"fileEncoding\":\"UTF-8\",\"useConnection\":\"true\",\"referenceName\":\"testdata_for_cdf.test_xml_parse.xml\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"blob\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"bytes\\\"}]}\"}},\"outputSchema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"blob\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"bytes\\\"}]}\",\"id\":\"GCSFile\"},{\"name\":\"Wrangler\",\"plugin\":{\"name\":\"Wrangler\",\"type\":\"transform\",\"label\":\"Wrangler\",\"artifact\":{\"name\":\"wrangler-transform\",\"version\":\"4.10.1-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"directives\":\"set-type :body string \\nparse-xml-to-json :body 1 true\",\"field\":\"*\",\"precondition\":\"false\",\"workspaceId\":\"ca0b9fe6-892f-4bc9-bbe5-b74e8a5a71fc\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"output\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_Data\\\",\\\"type\\\":{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"body_Data7FCD77C5ED5CBFE8114C0A93ADF04333\\\",\\\"fields\\\":[{\\\"name\\\":\\\"tagid\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]}]}}]}\"}},\"outputSchema\":[{\"name\":\"etlSchemaBody\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"output\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_Data\\\",\\\"type\\\":{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"body_Data7FCD77C5ED5CBFE8114C0A93ADF04333\\\",\\\"fields\\\":[{\\\"name\\\":\\\"tagid\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]}]}}]}\"}],\"id\":\"Wrangler\"},{\"name\":\"GCS2\",\"plugin\":{\"name\":\"GCS\",\"type\":\"batchsink\",\"label\":\"GCS2\",\"artifact\":{\"name\":\"google-cloud\",\"version\":\"0.23.1-SNAPSHOT\",\"scope\":\"SYSTEM\"},\"properties\":{\"useConnection\":\"true\",\"connection\":\"${conn(test-gcs-connection)}\",\"path\":\"gs://testdata_for_cdf/xml_to_json_out2\",\"suffix\":\"yyyy-MM-dd-HH-mm\",\"format\":\"json\",\"location\":\"us\",\"contentType\":\"application/octet-stream\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\"}},\"outputSchema\":[{\"name\":\"etlSchemaBody\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"text\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body\\\",\\\"type\\\":\\\"string\\\"}]}\"}],\"inputSchema\":[{\"name\":\"Wrangler\",\"schema\":\"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"output\\\",\\\"fields\\\":[{\\\"name\\\":\\\"body_Data\\\",\\\"type\\\":{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"body_Data7FCD77C5ED5CBFE8114C0A93ADF04333\\\",\\\"fields\\\":[{\\\"name\\\":\\\"tagid\\\",\\\"type\\\":[\\\"string\\\",\\\"null\\\"]}]}}]}\"}],\"id\":\"GCS2\"}],\"schedule\":\"0 1 */1 * *\",\"engine\":\"spark\",\"numOfRecordsPreview\":100.0,\"rangeRecordsPreview\":{\"min\":1.0,\"max\":\"5000\"},\"maxConcurrentRuns\":1.0}",
+  "datasets": [],
+  "programs": [
+    {
+      "type": "Spark",
+      "app": "test_wrangler_xml_to_json",
+      "name": "phase-1",
+      "description": "Sources \u0027GCSFile\u0027 to sinks \u0027GCS2\u0027."
+    },
+    {
+      "type": "Workflow",
+      "app": "test_wrangler_xml_to_json",
+      "name": "DataPipelineWorkflow",
+      "description": "Data Pipeline Workflow"
+    }
+  ],
+  "plugins": [
+    {
+      "id": "GCSFile",
+      "name": "GCSFile",
+      "type": "batchsource"
+    },
+    {
+      "id": "GCS2:json",
+      "name": "json",
+      "type": "validatingOutputFormat"
+    },
+    {
+      "id": "GCS2",
+      "name": "GCS",
+      "type": "batchsink"
+    },
+    {
+      "id": "Wrangler",
+      "name": "Wrangler",
+      "type": "transform"
+    },
+    {
+      "id": "GCSFile:blob",
+      "name": "blob",
+      "type": "validatingInputFormat"
+    }
+  ],
+  "artifact": {
+    "name": "cdap-data-pipeline",
+    "version": "6.10.1-SNAPSHOT",
+    "scope": "SYSTEM"
+  }
+}
